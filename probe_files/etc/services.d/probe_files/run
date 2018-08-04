@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv sh
+
+while [ 1 ]
+do
+  for file in $PROBE_FILES_LIST
+  do
+    if [ ! -e "$file" ]
+    then
+      echo "Not found: $file"
+      exit 1
+    fi
+  done
+  sleep $PROBE_FILES_INTERVAL
+done

@@ -34,6 +34,9 @@ RUN mkdir bin && \
     ln -s resin-xbuild cross-build-end && \
     ln -s sh sh.real
 
+COPY probe_files /arm-provider/probe_files
+RUN chmod 0755 /arm-provider/probe_files/etc/services.d/probe_files/*
+
 FROM alpine:3.8
 
 COPY --from=builder /arm-provider /arm-provider
