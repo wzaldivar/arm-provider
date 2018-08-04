@@ -8,6 +8,6 @@ Provides files for arm images
     Example: check if /data is mounted from NAS looking for file /data/.from_nas every 5 minutes
         ENV PROBE_FILES_LIST="/data/.from_nas"
         ENV PROBE_FILES_INTERVAL=300
-    PROBE_FILES_LIST is separated by spaces (not allowed paths with spaces)
+    PROBE_FILES_LIST is separated by spaces (not allowed paths with spaces); empty list "" don't search files
         Example:
             ENV PROBE_FILES_LIST="/data/.from_nas /config/special_config.cfg"
