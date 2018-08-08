@@ -35,6 +35,6 @@ Provides files for arm images
 > ENTRYPOINT ["/init"]
 
 ### probe_files
-> COPY --from=wzaldivararmhf/arm-provider /arm-provider/bin /usr/bin\
-> ENV PROBE_FILES_LIST=""\
+> COPY --from=wzaldivararmhf/arm-provider /arm-provider/probe_files /
+> ENV PROBE_FILES_LIST="/path/to/file/needed.chk"\
 > ENV PROBE_FILES_INTERVAL=300
