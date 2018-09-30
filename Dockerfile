@@ -1,7 +1,7 @@
-FROM golang:1.10-alpine3.8 as builder
+FROM golang:1.11-alpine3.8 as builder
 
-ARG QEMU_ARM_STATIC_VERSION="2.9.0+resin1"
-ARG S6_OVERLAY_VERSION="v1.21.4.0"
+ARG QEMU_ARM_STATIC_VERSION="qemu-3.0.0+resin-arm"
+ARG S6_OVERLAY_VERSION="v1.21.7.0"
 ARG RESIN_XBUILD_COMMIT="d4a214fa36e54febcda6e5126adb2ee2249c64e3"
 
 RUN apk add --no-cache git
@@ -10,9 +10,9 @@ RUN mkdir /arm-provider
 
 WORKDIR /arm-provider
 
-RUN wget 'https://github.com/resin-io/qemu/releases/download/v2.9.0%2Bresin1/qemu-2.9.0.resin1-arm.tar.gz' && \
-    tar -xzvf qemu-2.9.0.resin1-arm.tar.gz && \
-    rm qemu-2.9.0.resin1-arm.tar.gz
+RUN wget 'https://github.com/resin-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz' && \
+    tar -xzvf ${QEMU_ARM_STATIC_VERSION}.tar.gz && \
+    rm ${QEMU_ARM_STATIC_VERSION}.tar.gz
 
 RUN wget "https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-arm.tar.gz" && \
     mkdir s6_overlay && \
@@ -28,8 +28,8 @@ RUN git clone https://github.com/resin-io-projects/armv7hf-debian-qemu.git && \
 
 RUN mkdir bin && \
     mv resin-xbuild bin/ && \
-    mv qemu-2.9.0+resin1-arm/qemu-arm-static bin/ && \
-    rm -rf qemu-2.9.0+resin1-arm && \
+    mv ${QEMU_ARM_STATIC_VERSION}/qemu-arm-static bin/ && \
+    rm -rf ${QEMU_ARM_STATIC_VERSION} && \
     cd bin && \
     ln -s resin-xbuild cross-build-start && \
     ln -s resin-xbuild cross-build-end && \
