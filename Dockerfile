@@ -1,7 +1,7 @@
 FROM golang:1.11-alpine3.8 as builder
 
 ARG QEMU_ARM_STATIC_VERSION="qemu-3.0.0+resin-arm"
-ARG S6_OVERLAY_VERSION="v1.21.7.0"
+ARG S6_OVERLAY_VERSION="v1.21.8.0"
 ARG RESIN_XBUILD_COMMIT="d4a214fa36e54febcda6e5126adb2ee2249c64e3"
 
 RUN apk add --no-cache git
