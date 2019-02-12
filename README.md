@@ -6,7 +6,7 @@ Provides files for arm images
 
 * [qemu-arm-static v3.0.0+resin](https://github.com/resin-io/qemu)
 
-* [s6-overlay v1.21.7.0](https://github.com/just-containers/s6-overlay)
+* [s6-overlay v1.21.8.0](https://github.com/just-containers/s6-overlay)
 
 * resin-xbuild built from: [resin-xbuild.go commit d4a214fa36e54febcda6e5126adb2ee2249c64e3](https://github.com/resin-io-projects/armv7hf-debian-qemu)
 
