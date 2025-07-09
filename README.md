@@ -1,3 +1,17 @@
+# ⚠️ HISTORICAL ARTIFACT - NO LONGER NEEDED ⚠️
+
+This repository is kept for historical reference only. 
+
+**ARM is now a first-class citizen in Docker** - use native multi-arch builds instead:
+
+This toolchain used shell environment hijacking to emulate ARM cross-compilation on x86 systems before Docker had native multi-arch support. The complexity this solved is no longer necessary.
+
+**What this used to do:** Hijack `/bin/sh` to route commands through QEMU ARM emulation  
+**What you should do now:** Use Docker BuildKit's native multi-platform builds
+
+---
+*Original documentation below for historical interest...*
+
 # arm-provider
 
 ## v2.1
@@ -14,29 +28,39 @@ Provides files for arm images
     
     * Example: check if /data is mounted from NAS looking for file 
     /data/.from_nas every 5 minutes
-        > ENV PROBE_FILES_LIST="/data/.from_nas"\
-        > ENV PROBE_FILES_INTERVAL=300
+      ```
+      ENV PROBE_FILES_LIST="/data/.from_nas"
+      ENV PROBE_FILES_INTERVAL=300
+      ```
         
     PROBE_FILES_LIST is separated by spaces (not allowed paths with spaces); empty list "" don't search files
     
     * Example:
-        > ENV PROBE_FILES_LIST="/data/.from_nas /config/special_config.cfg"
+      ```
+      ENV PROBE_FILES_LIST="/data/.from_nas /config/special_config.cfg"
+      ```
 
 ## Usage
 
 ### qemu + resin-xbuild
-> COPY --from=wzaldivararmhf/arm-provider /arm-provider/bin /usr/bin\
-> RUN ["cross-build-start"]\
-> \
-> your build instructions...\
-> \
-> RUN ["cross-build-end"]
+```
+COPY --from=wzaldivararmhf/arm-provider /arm-provider/bin /usr/bin
+RUN ["cross-build-start"]
+
+your build instructions...
+
+RUN ["cross-build-end"]
+```
 
 ### s6-overlay
-> COPY --from=wzaldivararmhf/arm-provider /arm-provider/s6_overlay\
-> ENTRYPOINT ["/init"]
+```
+COPY --from=wzaldivararmhf/arm-provider /arm-provider/s6_overlay
+ENTRYPOINT ["/init"]
+```
 
 ### probe_files
-> COPY --from=wzaldivararmhf/arm-provider /arm-provider/probe_files /
-> ENV PROBE_FILES_LIST="/path/to/file/needed.chk"\
-> ENV PROBE_FILES_INTERVAL=300
+```
+COPY --from=wzaldivararmhf/arm-provider /arm-provider/probe_files /
+ENV PROBE_FILES_LIST="/path/to/file/needed.chk"
+ENV PROBE_FILES_INTERVAL=300
+```
