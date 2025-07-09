@@ -46,9 +46,7 @@ Provides files for arm images
 ```
 COPY --from=wzaldivararmhf/arm-provider /arm-provider/bin /usr/bin
 RUN ["cross-build-start"]
-
-your build instructions...
-
+# your build instructions...
 RUN ["cross-build-end"]
 ```
 
